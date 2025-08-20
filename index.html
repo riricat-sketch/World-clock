@@ -16,9 +16,18 @@
         <h1>World Clock</h1>
 
         <div class="controls">
-            <div class="search">
-                <input type="text" id="city-input" placeholder="Search for a city (e.g., Tokyo)" autocomplete="off" />
-                <button id="search-btn" aria-label="Search city time">Search</button>
+            <button id="my-location-btn" aria-label="Use my location" title="Show my location" type="button"
+                class="location-btn">
+                📍 My Location
+            </button>
+
+            <select id="city-select" aria-label="Select a city timezone">
+                <option value="">Choose a city</option>
+            </select>
+
+            <div class="search-bar">
+                <input type="text" id="city-input" placeholder="Search for a city (e.g., Tokyo)" />
+                <button id="search-btn">Search</button>
             </div>
         </div>
 

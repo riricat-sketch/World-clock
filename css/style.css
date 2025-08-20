@@ -25,7 +25,7 @@ body {
 
 /* Container */
 .container {
-  max-width: 1000px; /* Wider */
+  max-width: 1000px;
   width: 90%;
   padding: 2rem 3rem;
   background: rgba(255, 255, 255, 0.75);
@@ -48,39 +48,78 @@ h1 {
 .controls {
   display: flex;
   justify-content: center;
+  gap: 1rem;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
-.search {
+.location-btn {
+  font-size: 1.1rem;
+  padding: 0.6rem 1.5rem;
+  background-color: #f4f7fa;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  color: #444;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  white-space: nowrap;
+  min-width: 160px;
+  text-align: center;
+}
+
+.location-btn:hover,
+.location-btn:focus {
+  background-color: #e1e6ed;
+  border-color: #999;
+  outline: none;
+}
+
+#city-select {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1.5px solid #ccc;
+  background: #f4f7fa;
+  cursor: pointer;
+  min-width: 180px;
+  outline: none;
+}
+
+#city-select:focus {
+  border-color: #007bff;
+}
+
+.search-bar {
   display: flex;
-  width: 100%;
-  max-width: 600px; /* Wider input container */
+  gap: 0.75rem;
+  flex-grow: 1;
+  max-width: 480px;
 }
 
 #city-input {
-  flex: 1;
-  padding: 1rem 1.25rem;
-  font-size: 1.2rem;
-  border: none;
-  border-radius: 12px 0 0 12px;
-  background: #f4f7fa;
-  box-shadow: inset 2px 2px 7px rgba(0, 0, 0, 0.07);
+  flex-grow: 1;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px 0 0 8px;
+  border: 1.5px solid #ccc;
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.3s ease;
   color: #333;
-  transition: all 0.3s ease;
 }
 
 #city-input:focus {
   outline: none;
-  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.3);
+  border-color: #007bff;
 }
 
 #search-btn {
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 0 8px 8px 0;
   border: none;
-  border-radius: 0 12px 12px 0;
   background-color: #007bff;
-  color: #fff;
+  color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
