@@ -1,21 +1,29 @@
 let currentInterval;
 
+const defaultCities = [
+  "America/Los_Angeles",
+  "America/New_York",
+  "Europe/London",
+  "Australia/Sydney",
+];
+
+// Proper emojis using Unicode escapes to avoid encoding issues
+const flagMap = {
+  America: "\u{1F1FA}\u{1F1F8}", // 🇺🇸
+  Europe: "\u{1F1EC}\u{1F1E7}", // 🇬🇧
+  Australia: "\u{1F1E6}\u{1F1FA}", // 🇦🇺
+  Asia: "\u{1F1E8}\u{1F1F3}", // 🇨🇳
+};
+
 function formatCityName(timezone) {
   return timezone.split("/")[1].replace("_", " ");
 }
 
 function getFlagEmoji(timezone) {
   const region = timezone.split("/")[0];
-  const flags = {
-    America: "🇺🇸",
-    Europe: "🇬🇧",
-    Australia: "🇦🇺",
-    Asia: "🇨🇳",
-  };
-  return flags[region] || "🌍";
+  return flagMap[region] || "\u{1F30D}"; // 🌍 fallback globe
 }
 
-// Render a single city block
 function renderCityBlock(timezone) {
   const cityName = formatCityName(timezone);
   const flag = getFlagEmoji(timezone);
@@ -29,7 +37,6 @@ function renderCityBlock(timezone) {
   `;
 }
 
-// Update time for all city blocks on the page
 function updateAllTimes() {
   document.querySelectorAll(".city").forEach((city) => {
     const tz = city.getAttribute("data-timezone");
@@ -39,16 +46,10 @@ function updateAllTimes() {
   });
 }
 
-// Initial default cities
-const defaultCities = [
-  "America/Los_Angeles",
-  "America/New_York",
-  "Europe/London",
-  "Australia/Sydney",
-];
-
 function showDefaultCities() {
   const cityDisplay = document.getElementById("city-display");
+  const errorMsg = document.getElementById("error-message");
+  errorMsg.classList.add("hidden");
   cityDisplay.innerHTML = defaultCities.map(renderCityBlock).join("");
 
   if (currentInterval) clearInterval(currentInterval);
@@ -56,9 +57,11 @@ function showDefaultCities() {
   currentInterval = setInterval(updateAllTimes, 1000);
 }
 
-// Update display with a single selected city
 function updateCityUI(timezone) {
   const cityDisplay = document.getElementById("city-display");
+  const errorMsg = document.getElementById("error-message");
+  errorMsg.classList.add("hidden");
+
   cityDisplay.innerHTML = renderCityBlock(timezone);
 
   if (currentInterval) clearInterval(currentInterval);
@@ -74,16 +77,35 @@ function updateCityUI(timezone) {
   currentInterval = setInterval(updateTime, 1000);
 }
 
-// Handle dropdown changes
-document.getElementById("city-select").addEventListener("change", function () {
-  const timezone = this.value;
+function isValidTimezone(cityInput) {
+  const zoneNames = moment.tz.names();
+  return zoneNames.find((name) =>
+    name.toLowerCase().includes(cityInput.toLowerCase())
+  );
+}
 
-  if (timezone) {
-    updateCityUI(timezone);
+// On load, show default cities
+showDefaultCities();
+
+// Search button listener
+document.getElementById("search-btn").addEventListener("click", () => {
+  const input = document.getElementById("city-input").value.trim();
+  if (!input) return; // ignore empty input
+
+  const match = isValidTimezone(input);
+
+  if (match) {
+    updateCityUI(match);
   } else {
-    showDefaultCities(); // Reset to default cities
+    const errorMsg = document.getElementById("error-message");
+    errorMsg.textContent = `City "${input}" not found. Please try again.`;
+    errorMsg.classList.remove("hidden");
   }
 });
 
-// On first load
-showDefaultCities();
+// Enter key triggers search
+document.getElementById("city-input").addEventListener("keydown", function (e) {
+  if (e.key === "Enter") {
+    document.getElementById("search-btn").click();
+  }
+});

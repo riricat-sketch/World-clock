@@ -15,26 +15,22 @@
     <div class="container">
         <h1>World Clock</h1>
 
-        <!-- City Selector -->
-        <select id="city-select">
-            <option value="">Choose a city</option>
-            <option value="America/Los_Angeles">Los Angeles 🇺🇸</option>
-            <option value="Europe/London">London 🇬🇧</option>
-            <option value="America/New_York">New York 🇺🇸</option>
-            <option value="Asia/Shanghai">Shanghai 🇨🇳</option>
-            <option value="Australia/Sydney">Sydney 🇦🇺</option>
-        </select>
-
-        <!-- Dynamic City Display -->
-        <div id="city-display">
-            <p style="text-align: center; color: #555;">Please select a city to see the time.</p>
+        <div class="controls">
+            <div class="search">
+                <input type="text" id="city-input" placeholder="Search for a city (e.g., Tokyo)" autocomplete="off" />
+                <button id="search-btn" aria-label="Search city time">Search</button>
+            </div>
         </div>
 
-        <footer>
-            This project was coded by Ri Audoire and is
-            <a href="https://github.com/riricat-sketch/World-clock" target="_blank">open sourced on GitHub</a>
-        </footer>
+        <div id="city-display"></div>
+        <p id="error-message" class="hidden" role="alert"></p>
     </div>
+
+    <footer>
+        This project was coded by Ri Audoire and is
+        <a href="https://github.com/riricat-sketch/World-clock" target="_blank" rel="noopener noreferrer">open sourced
+            on GitHub</a>
+    </footer>
 
     <script src="Javascript/index.js"></script>
 </body>
