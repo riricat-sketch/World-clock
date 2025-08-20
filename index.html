@@ -5,17 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-
-    <title>World clock</title>
+    <title>World Clock</title>
 </head>
 
 <body>
+    <div class="container">
+        <h1>World Clock</h1>
 
-    <h1>World Clock</h1>
+        <!-- City Selector -->
+        <select id="city-select">
+            <option value="">Choose a city</option>
+            <option value="london">London</option>
+            <option value="new-york">New York</option>
+            <option value="shanghai">Shanghai</option>
+            <option value="sydney">Sydney</option>
+        </select>
 
-    <footer>This project was coded by Ri Audoire and is
-        <a href="https://github.com/riricat-sketch/World-clock" target="_blank"> open sourced on Github </a>
-    </footer>
+        <!-- City: Los Angeles -->
+        <div class="city">
+            <h2>Los Angeles 🇺🇸</h2>
+            <div class="date">August 20th, 2025</div>
+            <div class="time">08:30 AM</div>
+        </div>
+
+        <!-- City: Sydney -->
+        <div class="city">
+            <h2>Sydney 🇦🇺</h2>
+            <div class="date">August 20th, 2025</div>
+            <div class="time">01:30 AM</div>
+        </div>
+
+        <footer>
+            This project was coded by Ri Audoire and is
+            <a href="https://github.com/riricat-sketch/World-clock" target="_blank">open sourced on GitHub</a>
+        </footer>
+    </div>
+
     <script src="Javascript/index.js"></script>
 </body>
 
